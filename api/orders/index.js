@@ -79,34 +79,40 @@
         function (order, addressLink, cardLink, callback) {
           async.parallel([
               function (callback) {
-                console.log("GET Request to: " + addressLink);
-                request.get(addressLink, function (error, response, body) {
-                  if (error) {
-                    callback(error);
-                    return;
-                  }
-                  console.log("Received response: " + JSON.stringify(body));
-                  var jsonBody = JSON.parse(body);
-                  if (jsonBody.status_code !== 500 && jsonBody._embedded.address[0] != null) {
-                    order.address = jsonBody._embedded.address[0]._links.self.href;
-                  }
-                  callback();
-                });
+                console.log("addressLink: GET Request to: " + addressLink);
+                var checkIt = "" + addressLink;
+                if (checkIt != "undefined" ) {
+                  request.get(addressLink, function (error, response, body) {
+                    if (error) {
+                      callback(error);
+                      return;
+                    }
+                    console.log("Received response: " + JSON.stringify(body));
+                    var jsonBody = JSON.parse(body);
+                    if (jsonBody.status_code !== 500 && jsonBody._embedded.address[0] != null) {
+                      order.address = jsonBody._embedded.address[0]._links.self.href;
+                    }
+                    callback();
+                  });
+                }
               },
               function (callback) {
-                console.log("GET Request to: " + cardLink);
-                request.get(cardLink, function (error, response, body) {
-                  if (error) {
-                    callback(error);
-                    return;
-                  }
-                  console.log("Received response: " + JSON.stringify(body));
-                  var jsonBody = JSON.parse(body);
-                  if (jsonBody.status_code !== 500 && jsonBody._embedded.card[0] != null) {
-                    order.card = jsonBody._embedded.card[0]._links.self.href;
-                  }
-                  callback();
-                });
+                console.log("cardLink: GET Request to: " + cardLink);
+                var checkIt = "" + cardLink;
+                if (checkIt != "undefined" ) {
+                  request.get(cardLink, function (error, response, body) {
+                    if (error) {
+                      callback(error);
+                      return;
+                    }
+                    console.log("Received response: " + JSON.stringify(body));
+                    var jsonBody = JSON.parse(body);
+                    if (jsonBody.status_code !== 500 && jsonBody._embedded.card[0] != null) {
+                      order.card = jsonBody._embedded.card[0]._links.self.href;
+                    }
+                    callback();
+                  });
+                }
               }
           ], function (err, result) {
             if (err) {
