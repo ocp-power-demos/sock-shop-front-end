@@ -41,6 +41,7 @@
    */
   helpers.respondStatusBody = function(res, statusCode, body) {
     res.writeHeader(statusCode);
+    res.writeHeader("application/json");
     res.write(body);
     res.end();
   }
@@ -48,6 +49,7 @@
   /* Responds with the given statusCode */
   helpers.respondStatus = function(res, statusCode) {
     res.writeHeader(statusCode);
+    res.writeHeader("application/json");
     res.end();
   }
 
