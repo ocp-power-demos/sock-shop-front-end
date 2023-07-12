@@ -40,8 +40,7 @@
    * body       - (string) the body to yield to the response
    */
   helpers.respondStatusBody = function(res, statusCode, body) {
-    res.writeHeader(statusCode);
-    res.writeHeader("Content-Type", "application/json");
+    res.writeHeader(statusCode, {'content-type':'application/json'});
     res.write(body);
     res.end();
   }
