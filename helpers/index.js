@@ -47,8 +47,7 @@
 
   /* Responds with the given statusCode */
   helpers.respondStatus = function(res, statusCode) {
-    res.writeHeader(statusCode);
-    res.writeHeader("application/json");
+    res.writeHeader(statusCode, {'content-type':'application/json'});
     res.end();
   }
 
