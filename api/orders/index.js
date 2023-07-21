@@ -69,8 +69,8 @@
             var cardLink = jsonBody._links.cards.href;
             var order = {
               "customer": customerlink,
-              "address": null,
-              "card": null,
+              "address": addressLink,
+              "card": cardLink,
               "items": endpoints.cartsUrl + "/" + custId + "/items"
             };
             callback(null, order, addressLink, cardLink);
