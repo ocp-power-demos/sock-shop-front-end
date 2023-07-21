@@ -172,11 +172,12 @@ function username(id, callback) {
         url: "customers/" + id,
         type: "GET",
         success: function (data, textStatus, jqXHR) {
-            json = JSON.parse(data);
-            if (json.status_code !== 500) {
-                callback(json.firstName + " " + json.lastName);
+            // The prior code assumed the data element was a string and marshalled the code to a JSON Object
+            // The code is already an object.
+            if (textStatus !== "") {
+                callback(data.firstName + " " + data.lastName);
             } else {
-                console.error('Could not get user information: ' + id + ', due to: ' + json.status_text + ' | ' + json.error);
+                console.error('Could not get user information: ' + id + ', due to: ' + textStatus + ' | ' + json.error);
                 return callback(undefined);
             }
         },
