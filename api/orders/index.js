@@ -89,8 +89,8 @@
                     }
                     console.log("Received response: " + JSON.stringify(body));
                     var jsonBody = JSON.parse(body);
-                    if (jsonBody.status_code !== 500 && jsonBody._embedded.address[0] != null) {
-                      order.address = jsonBody._embedded.address[0]._links.self.href;
+                    if (jsonBody.status_code !== 500) {
+                      order.address = addressLink;
                     }
                     callback();
                   });
@@ -107,8 +107,8 @@
                     }
                     console.log("Received response: " + JSON.stringify(body));
                     var jsonBody = JSON.parse(body);
-                    if (jsonBody.status_code !== 500 && jsonBody._embedded.card[0] != null) {
-                      order.card = jsonBody._embedded.card[0]._links.self.href;
+                    if (jsonBody.status_code !== 500) {
+                      order.card = cardLink;
                     }
                     callback();
                   });
